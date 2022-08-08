@@ -1,6 +1,6 @@
 #pragma once
 
-#include "editor.h"
+#include "tabs.h"
 
 #include <QMainWindow>
 
@@ -12,7 +12,7 @@ public:
     Solstice();
 
 private:
-    Editor *editor;
+    Tabs *tabs;
 
     void openFile();
     void openFolder();

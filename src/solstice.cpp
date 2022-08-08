@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "solstice.h"
-#include "editor.h"
+#include "tabs.h"
 
 #include <QRect>
 #include <QWidget>
@@ -15,9 +15,15 @@ Solstice::Solstice()
 {
     this->setWindowTitle("Solstice Editor");
     this->setGeometry(QRect {160, 90, 1600, 900});
+
     auto centralWidget = new QWidget;
     auto layout = new QHBoxLayout;
-    editor = new Editor;
+
+    tabs = new Tabs;
+    tabs->addTab("Hi");
+    tabs->addTab("Hello");
+    layout->addWidget(tabs);
+    layout->setAlignment(Qt::AlignTop);
 
     centralWidget->setLayout(layout);
     this->setCentralWidget(centralWidget);
@@ -26,7 +32,7 @@ Solstice::Solstice()
 
 void Solstice::openFile()
 {
-    editor->openFile();
+    std::cout << "Solstice::openFile()\n";
 }
 
 void Solstice::openFolder()
