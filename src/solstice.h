@@ -1,5 +1,7 @@
 #pragma once
 
+#include "tabContainer.h"
+
 #include <QMainWindow>
 #include <QWidget>
 #include <QHBoxLayout>
@@ -14,11 +16,10 @@ public:
 private:
     QWidget *centralWidget;
     QHBoxLayout *layout;
+    TabContainer *tabContainer;
 
     void configure();
-
     void openFile();
     void openFolder();
-
     void configureMenus();
 };

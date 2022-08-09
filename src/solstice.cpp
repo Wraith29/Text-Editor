@@ -2,9 +2,9 @@
 
 #include "solstice.h"
 
+#include <QString>
 #include <QRect>
 #include <QWidget>
-#include <QString>
 #include <QAction>
 #include <QMenuBar>
 #include <QFileDialog>
@@ -21,6 +21,8 @@ void Solstice::configure()
     this->setGeometry(QRect {160, 90, 1600, 900});
     centralWidget = new QWidget;
     layout = new QHBoxLayout;
+    tabContainer = new TabContainer;
+    layout->addWidget(tabContainer);
 
     centralWidget->setLayout(layout);
     this->setCentralWidget(centralWidget);
@@ -29,7 +31,7 @@ void Solstice::configure()
 
 void Solstice::openFile()
 {
-    std::cout << "Solstice::openFile()\n";
+    tabContainer->openFile();
 }
 
 void Solstice::openFolder()
