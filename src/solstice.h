@@ -1,8 +1,8 @@
 #pragma once
 
-#include "tabs.h"
-
 #include <QMainWindow>
+#include <QWidget>
+#include <QHBoxLayout>
 
 class Solstice : public QMainWindow
 {
@@ -12,7 +12,10 @@ public:
     Solstice();
 
 private:
-    Tabs *tabs;
+    QWidget *centralWidget;
+    QHBoxLayout *layout;
+
+    void configure();
 
     void openFile();
     void openFolder();
