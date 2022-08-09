@@ -12,21 +12,23 @@
 
 Solstice::Solstice()
 {
-    this->configure();
+    configure();
 }
 
 void Solstice::configure()
 {
-    this->setWindowTitle("Solstice Editor");
-    this->setGeometry(QRect {160, 90, 1600, 900});
+    setWindowTitle("Solstice Editor");
+    setGeometry(QRect {160, 90, 1600, 900});
     centralWidget = new QWidget;
     layout = new QHBoxLayout;
     tabContainer = new TabContainer;
     layout->addWidget(tabContainer);
+    tree = new Tree(tabContainer);
+    treeViewEnabled = false;
 
     centralWidget->setLayout(layout);
-    this->setCentralWidget(centralWidget);
-    this->configureMenus();
+    setCentralWidget(centralWidget);
+    configureMenus();
 }
 
 void Solstice::openFile()
@@ -36,7 +38,13 @@ void Solstice::openFile()
 
 void Solstice::openFolder()
 {
-    std::cout << "Solstice::openFolder()\n";
+    std::cout << "Opening Folder\n";
+    if (!treeViewEnabled) 
+    {
+        layout->addWidget(tree);
+        treeViewEnabled = true;
+    }
+    tree->openFolder();
 }
 
 void Solstice::configureMenus()

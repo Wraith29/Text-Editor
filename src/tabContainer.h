@@ -13,6 +13,7 @@ Q_OBJECT
 public:
     TabContainer();
     void openFile();
+    void openFile(QString path);
 
 private:
     std::list<EditorTab*> tabs;

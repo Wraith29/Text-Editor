@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <QFileDialog>
+#include <QString>
 
 TabContainer::TabContainer()
 {
@@ -10,9 +11,17 @@ TabContainer::TabContainer()
 
 void TabContainer::openFile()
 {
-    auto filepath = QFileDialog::getOpenFileName();
-    auto filename = filepath.split("/").last();
-    auto tab = new EditorTab(filepath);
+    auto path = QFileDialog::getOpenFileName();
+    auto name = path.split("/").last();
+    auto tab = new EditorTab(path);
     tabs.push_back(tab);
-    addTab(tab, filename);
+    addTab(tab, name);
+}
+
+void TabContainer::openFile(QString path)
+{
+    auto name = path.split("/").last();
+    auto tab = new EditorTab(path);
+    tabs.push_back(tab);
+    addTab(tab, name);
 }
