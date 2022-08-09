@@ -1,57 +1,44 @@
 #include <iostream>
+#include <string>
+#include <fstream>
 
 #include "solstice.h"
 
-#include <QString>
 #include <QRect>
 #include <QWidget>
-#include <QAction>
-#include <QMenuBar>
-#include <QFileDialog>
-#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QMessageBox>
+#include <QPlainTextEdit>
 
-Solstice::Solstice()
+std::string readFile(std::string filename)
 {
-    configure();
+    std::ifstream input(filename);
+    if (input.bad())
+    {
+        QMessageBox(
+            QMessageBox::Icon::Critical,
+            QString::fromStdString("IOError"),
+            QString::fromStdString("Error opening file: " + filename)
+        );
+        return "";
+    }
+
+    std::string content;
+    for (std::string line; getline(input, line);)
+        content.append(line + '\n');
+    return content;
 }
 
-void Solstice::configure()
+Solstice::Solstice(std::string _filename) : filename(_filename)
 {
     setWindowTitle("Solstice Editor");
     setGeometry(QRect {160, 90, 1600, 900});
-    centralWidget = new QWidget;
-    layout = new QHBoxLayout;
-    tabContainer = new TabContainer;
-    layout->addWidget(tabContainer);
-    tree = new Tree(tabContainer);
-    treeViewEnabled = false;
+    editor = new QPlainTextEdit;
+    editor->setPlainText(QString::fromStdString(readFile(filename)));
 
-    centralWidget->setLayout(layout);
-    setCentralWidget(centralWidget);
-    configureMenus();
-}
 
-void Solstice::openFile()
-{
-    tabContainer->openFile();
-}
-
-void Solstice::openFolder()
-{
-    std::cout << "Opening Folder\n";
-    if (!treeViewEnabled) 
-    {
-        layout->addWidget(tree);
-        treeViewEnabled = true;
-    }
-    tree->openFolder();
-}
-
-void Solstice::configureMenus()
-{
-    auto fileMenu = menuBar()->addMenu("&File");
-    auto openFileAction = fileMenu->addAction("Open");
-    connect(openFileAction, &QAction::triggered, this, &Solstice::openFile);
-    auto openFolderAction = fileMenu->addAction("Open Folder");
-    connect(openFolderAction, &QAction::triggered, this, &Solstice::openFolder);
+    auto central = new QWidget;
+    central->setLayout(new QVBoxLayout);
+    central->layout()->addWidget(editor);
+    setCentralWidget(central);
 }

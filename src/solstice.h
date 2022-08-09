@@ -1,29 +1,22 @@
 #pragma once
 
-#include "tabContainer.h"
-#include "tree.h"
+#include <string>
 
-#include <QMainWindow>
 #include <QWidget>
+#include <QMainWindow>
 #include <QHBoxLayout>
+#include <QPlainTextEdit>
 
 class Solstice : public QMainWindow
 {
 Q_OBJECT
 
 public:
-    Solstice();
+    Solstice(std::string filename);
 
 private:
-    bool treeViewEnabled;
-
+    std::string filename;
     QWidget *centralWidget;
     QHBoxLayout *layout;
-    TabContainer *tabContainer;
-    Tree *tree;
-
-    void configure();
-    void openFile();
-    void openFolder();
-    void configureMenus();
+    QPlainTextEdit *editor;
 };

@@ -4,10 +4,17 @@
 
 #include "solstice.h"
 
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
+    if (argc < 2) 
+    {
+        std::cout << "Error: Must include a filename";
+        return 1;
+    }
+    auto filename = argv[1];
+
     QApplication app(argc, argv);
-    Solstice mw;
+    Solstice mw(filename);
     mw.show();
 
     return app.exec();

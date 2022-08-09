@@ -14,6 +14,6 @@ INCLUDEPATH += .
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # Input
-HEADERS += src/solstice.h src/tabContainer.h src/editorTab.h src/tree.h
-SOURCES += src/main.cpp src/solstice.cpp src/tabContainer.cpp src/editorTab.cpp src/tree.cpp
+HEADERS += src/solstice.h
+SOURCES += src/main.cpp src/solstice.cpp
 QT += widgets core gui
